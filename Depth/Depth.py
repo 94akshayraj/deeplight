@@ -1,26 +1,25 @@
 import tensorflow as tf
 import sys
 import os
-import argparse
 import time
 import datetime
 from utils import *
 from pydnet import *
 resolution=2
-checkpoint_dir='checkpoint/IROS18/pydnet'
+checkpoint_dir='Depth/checkpoint/pydnet'
 def DepthMap(img):
 	with tf.Graph().as_default():
-    		height=512
-    		width=512
-    		obt=int(0.33*512)
-    		tbt=int(0.66*512)
-    		placeholders = {'im0':tf.placeholder(tf.float32,[None, None, None, 3], name='im0')}
-    		with tf.variable_scope("model") as scope:
-      			model = pydnet(placeholders)
-    			init = tf.group(tf.global_variables_initializer(),
-                   		tf.local_variables_initializer())
-    			loader = tf.train.Saver()
-    			saver = tf.train.Saver()
+	    	height=512
+	    	width=512
+	    	obt=int(0.33*512)
+	   	tbt=int(0.66*512)
+	    	placeholders = {'im0':tf.placeholder(tf.float32,[None, None, None, 3], name='im0')}
+	    	with tf.variable_scope("model") as scope:
+	      		model = pydnet(placeholders)
+	    		init = tf.group(tf.global_variables_initializer(),
+	               		tf.local_variables_initializer())
+	    		loader = tf.train.Saver()
+	    		saver = tf.train.Saver()
     		with tf.Session() as sess:
         		sess.run(init)
         		loader.restore(sess,checkpoint_dir)

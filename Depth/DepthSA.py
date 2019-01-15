@@ -8,7 +8,7 @@ from utils import *
 from pydnet import *
 
 resolution=2
-checkpoint_dir='checkpoint/IROS18/pydnet'
+checkpoint_dir='checkpoint/pydnet'
 def main(_):
 
   with tf.Graph().as_default():
