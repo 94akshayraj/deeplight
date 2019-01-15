@@ -86,6 +86,6 @@ def caption(image):
     # return caption
     play(sentence)
     time.sleep(5)
-    print(sentence)
-
+    #print(sentence)
+    return sentence
 caption("./png/12.jpg")
