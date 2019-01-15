@@ -8,12 +8,8 @@ while(1):
 	ret, img2=cap.read()
 	if mode==1:
 		print "Obstacle Detection"
-    		cv2.namedWindow('video',cv2.WINDOW_NORMAL)
 		img2,Ob=D.DepthMap(img2)
-		cv2.imshow('video',img2)
-    		k=cv2.waitKey(1) & 0xFF
-    		if k==27:
-        		break
+		E.play(Ob)
 	if mode==2:
 		print "Captioning"
 		sent=E.caption(img2)

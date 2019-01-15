@@ -7,6 +7,17 @@ from utils import *
 from pydnet import *
 resolution=2
 checkpoint_dir='Depth/checkpoint/pydnet'
+def Obst(ar):
+	if ar[0,0] and ar[0,1] and ar[0,2]:
+		return " There is something on Top"
+	if ar[1,0] and ar[1,1] and ar[1,2]:
+		return " There is Infront of You"
+	if ar[2,0] and ar[2,1] and ar[2,2]:
+		return " There is something Below you"
+	if ar[0,0] and ar[1,0] and ar[2,0]:
+		return " There is something on your Right Side"
+	if ar[0,2] and ar[1,2] and ar[2,2]:
+		return " There is something on your Left Side"
 def DepthMap(img):
 	with tf.Graph().as_default():
 	    	height=512
@@ -45,6 +56,7 @@ def DepthMap(img):
           		O[2,1]=disp_color[tbt:height,obt:tbt,:].mean()
           		O[2,2]=disp_color[tbt:height,tbt:width,:].mean()
 	  		Obstacle_Mat=O>0.5
+			Obs=Obst(Obstacle_Mat)
           		del img
           		del disp
-			return disp_color,Obstacle_Mat
+			return disp_color,Obs
